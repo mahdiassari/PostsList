@@ -244,6 +244,7 @@ const Table = (props) => {
           tblConfig.row.map((each, i) => {
             return (
               <TblHeaderCol
+                key={`tblHeaderCol${i}`}
                 className="bict__tblHeaderItem"
                 responsiveShow={each.responsiveShow}
                 responsiveBreakPoint={each.responsiveBreakPoint}
@@ -273,7 +274,7 @@ const Table = (props) => {
           tblData.map((each, i) => {
             return (
               <TblRow
-                key={i}
+                key={`tblRow${i}`}
                 className={`bict__tblRow ${
                   (i + 1) % 2 == 0 ? `bict__tblRow__even` : `bict__tblRow__odd`
                 }`}
@@ -283,6 +284,7 @@ const Table = (props) => {
                 {tblConfig.row.map((Row, colIndex) => {
                   let Element = (props) => (
                     <Row.element
+                    key={`row.element${colIndex}`}
                       index={i}
                       row={each}
                       rowIndex={skip - take + i + 1}
@@ -352,11 +354,11 @@ Table.propTypes = {
   /**
    * حالت لودینگ
    */
-  loading: false,
+  loading: PropTypes.bool,
   /**
    * کامپوننت لودینگ
    */
-  loader: null,
+  loader: PropTypes.func,
   /**
    * اطلاعات جدول
    */
@@ -365,15 +367,15 @@ Table.propTypes = {
    * کانفیگ جدول
    */
   tblConfig: PropTypes.shape({
-    showHeader: true,
-    disable: false,
+    showHeader: PropTypes.bool,
+    disable: PropTypes.bool,
     row: PropTypes.arrayOf(
       PropTypes.shape({
         headerTitle: PropTypes.string,
         displayTitle: PropTypes.string,
         size: PropTypes.number,
         responsiveShow: PropTypes.bool,
-        element: PropTypes.oneOfType([string, Function]),
+        element: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
       })
     ),
   }),

@@ -58,7 +58,7 @@ const PostDetails = (props) => {
           <CommentsContainer>
             {postComments.map((item, index) => {
               return (
-                <Comment key={index}>
+                <Comment key={`comment${index}`}>
                   {commentsLoading === false ? (
                     <>
                       <Row className="row">

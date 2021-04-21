@@ -59,18 +59,17 @@ const Pagination = (props) => {
 
       {PagesArray.map((page, i) => {
         return (
-          <>
-            <StyledPagination
-              className={`bict__paginationPageNum  ${
-                page.number === currentPage && "bict__paginationPageNum_active"
-              }`}
-              selected={page.number === currentPage ? true : false}
-              hoverable={page.number !== currentPage ? true : false}
-              onClick={() => pageHandler(page.number * pageSize)}
-            >
-              {page.number + 1}
-            </StyledPagination>
-          </>
+          <StyledPagination
+            key={`styledPagination${i}`}
+            className={`bict__paginationPageNum  ${
+              page.number === currentPage && "bict__paginationPageNum_active"
+            }`}
+            selected={page.number === currentPage ? true : false}
+            hoverable={page.number !== currentPage ? true : false}
+            onClick={() => pageHandler(page.number * pageSize)}
+          >
+            {page.number + 1}
+          </StyledPagination>
         );
       })}
       {totalPage - currentPage > offset && (
